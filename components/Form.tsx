@@ -1,5 +1,5 @@
 "use client";
-import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import React, { useState } from "react";
 
 const steps = [
@@ -252,10 +252,7 @@ export default function Form() {
             disabled={currentStep === 0}
             className="rounded bg-white px-2 py-1 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            <ArrowBigLeft
-              size={24}
-              className="fill-slate-950 stroke-slate-950"
-            />
+            <ArrowLeft size={24} className=" stroke-slate-950" />
           </button>
           <button
             type="button"
@@ -263,10 +260,7 @@ export default function Form() {
             disabled={currentStep === steps.length - 1}
             className="rounded bg-white px-2 py-1 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            <ArrowBigRight
-              size={24}
-              className="fill-slate-950 stroke-slate-950"
-            />
+            <ArrowRight size={24} className=" stroke-slate-950" />
           </button>
         </div>
       </div>
