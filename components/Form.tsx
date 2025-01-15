@@ -5,6 +5,9 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FormDataSchema } from "@/lib/schema";
+import { motion } from "framer-motion";
+
+// Reference Github Repo: https://github.com/HamedBahram/next-multistep-form/tree/main
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -23,7 +26,9 @@ const steps = [
 ];
 
 export default function Form() {
+  const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
+  const delta = currentStep - previousStep;
 
   const {
     register,
@@ -54,12 +59,14 @@ export default function Form() {
         //   Submits the form in the second to last step since last step is a completion page step.
         await handleSubmit(processForm)();
       }
+      setPreviousStep(currentStep);
       setCurrentStep((step) => step + 1);
     }
   };
 
   const prev = () => {
     if (currentStep > 0) {
+      setPreviousStep(currentStep);
       setCurrentStep((step) => step - 1);
     }
   };
@@ -70,7 +77,7 @@ export default function Form() {
   const allValues = watch(); // Watch all fields
 
   return (
-    <section className="w-full h-full max-w-5xl mx-auto flex flex-col justify-start p-24 mb-20 bg-white text-black rounded-lg shadow-lg">
+    <section className="w-full h-full max-w-5xl mx-auto flex flex-col justify-start p-24 mb-20 bg-white text-black rounded-lg shadow-lg overflow-hidden">
       {/* steps */}
       <nav aria-label="Progress">
         <ol role="list" className="space-y-4 md:flex md:space-x-8 md:space-y-0">
@@ -109,7 +116,11 @@ export default function Form() {
       {/* Form Element */}
       <form className="mt-12 py-12" onSubmit={handleSubmit(processForm)}>
         {currentStep === 0 && (
-          <div>
+          <motion.div
+            initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
             <h2 className="text-base font-semibold leading-7 text-gray-900">
               Personal Information
             </h2>
@@ -197,11 +208,15 @@ export default function Form() {
                 </pre>
               </div> */}
             </div>
-          </div>
+          </motion.div>
         )}
 
         {currentStep === 1 && (
-          <div>
+          <motion.div
+            initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
             <h2 className="text-base font-semibold leading-7 text-gray-900">
               Address
             </h2>
@@ -335,18 +350,22 @@ export default function Form() {
                 </pre>
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
 
         {currentStep === 2 && (
-          <>
+          <motion.div
+            initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
             <h2 className="text-base font-semibold leading-7 text-gray-900">
               Complete
             </h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">
               Thank you for your submission.
             </p>
-          </>
+          </motion.div>
         )}
       </form>
 
