@@ -20,7 +20,6 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
@@ -164,9 +163,7 @@ export default function MultiStepForm() {
                       <CalendarIcon className="mr-2 h-4 w-4" />
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0">
-                    <Calendar mode="single" initialFocus />
-                  </PopoverContent>
+                  <PopoverContent className="w-auto p-0"></PopoverContent>
                 </Popover>
               </div>
 
